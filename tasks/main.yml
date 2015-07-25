@@ -1,0 +1,44 @@
+---
+
+- name: Ensure groups are present
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    state: present
+  with_items: users_groups
+
+- name: Ensure removed groups are absent
+  group:
+    name: "{{ item.name }}"
+    state: absent
+  with_items: users_groups_removed
+
+- name: Ensure users are present
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default([]) | join(',') }}"
+    comment: "{{ item.comment | default(omit) }}"
+    home: "{{ item.home | default(omit) }}"
+    shell: "{{ item.shell | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    generate_ssh_key: "{{ item.generate_ssh_key | default(omit) }}"
+    state: present
+  with_items: users_users
+
+- name: Apply authorized keys
+  authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ lookup('file', item.1) }}"
+  with_subelements:
+    - users_users
+    - authorized_keys
+
+- name: Ensure removed users are absent
+  user:
+    name: "{{ item.name }}"
+    state: absent
+  with_items: users_users_removed

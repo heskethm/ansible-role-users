@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+  - ansible-role-users
+  vars:
+    users_groups:
+    - name: "winterfell"
+    - name: "nightswatch"
+    - name: "wildlings"
+
+    users_groups_removed:
+    - name: "targaryen"
+
+    users_users:
+    # Robb
+    - name: "robb"
+      group: "winterfell"
+      authorized_keys:
+      - "files/keys/ned.pub"
+      - "files/keys/robb-home-pc.pub"
+
+    # John
+    - name: "john"
+      group: "winterfell"
+      groups:
+      - "nightswatch"
+      - "wildlings"
+      generate_ssh_key: yes
+      authorized_keys:
+      - "files/keys/ned.pub"
+      - "files/keys/john-work.pub"
+
+    users_users_removed:
+    - name: "ned"
+    - name: "cat"
