@@ -11,10 +11,10 @@ install:
 
 script:
 # Check test playbook syntax
-- "ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check"
+- "ansible-playbook -i tests/inventory tests/provision.yml --syntax-check"
 
 # Run the test playbook
-- "ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo"
+- "ansible-playbook -i tests/inventory tests/provision.yml --connection=local --sudo"
 
 # Run the test playbook again to test it idempotent
 - >

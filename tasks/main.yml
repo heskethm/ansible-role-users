@@ -6,13 +6,13 @@
     gid: "{{ item.gid | default(omit) }}"
     system: "{{ item.system | default(omit) }}"
     state: present
-  with_items: users_groups
+  with_items: "{{ users_groups }}"
 
 - name: Ensure removed groups are absent
   group:
     name: "{{ item.name }}"
     state: absent
-  with_items: users_groups_removed
+  with_items: "{{ users_groups_removed }}"
 
 - name: Ensure users are present
   user:
@@ -27,18 +27,19 @@
     system: "{{ item.system | default(omit) }}"
     generate_ssh_key: "{{ item.generate_ssh_key | default(omit) }}"
     state: present
-  with_items: users_users
+  with_items: "{{ users_users }}"
 
 - name: Apply authorized keys
   authorized_key:
     user: "{{ item.0.name }}"
     key: "{{ lookup('file', item.1) }}"
   with_subelements:
-    - users_users
+    - "{{ users_users }}"
     - authorized_keys
+    - skip_missing: yes
 
 - name: Ensure removed users are absent
   user:
     name: "{{ item.name }}"
     state: absent
-  with_items: users_users_removed
+  with_items: "{{ users_users_removed }}"

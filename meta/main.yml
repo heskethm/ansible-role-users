@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  author: heskethm
+  author: markahesketh
   description: Manage system users and groups
   license: MIT
   min_ansible_version: 1.8

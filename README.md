@@ -1,7 +1,7 @@
 Ansible Role: Users and Groups
 ==============================
 
-[![Build Status](https://travis-ci.org/heskethm/ansible-role-users.svg)](https://travis-ci.org/heskethm/ansible-role-users)
+[![Build Status](https://travis-ci.org/markahesketh/ansible-role-users.svg)](https://travis-ci.org/markahesketh/ansible-role-users)
 
 Ansible role for managing system users and groups.
 
@@ -9,7 +9,7 @@ Installation
 ------------
 
 ```
-$ ansible-galaxy install heskethm.users
+$ ansible-galaxy install markahesketh.users
 ```
 
 Role Variables
@@ -76,7 +76,7 @@ Example Playbook
 ```yml
 - hosts: web
   roles:
-     - { role: heskethm.users }
+     - { role: markahesketh.users }
 ```
 
 Example Usage
@@ -118,12 +118,12 @@ users_users_removed:
 Author
 ------
 
-* Web: [markhesketh.co.uk](http://www.markhesketh.co.uk/)
+* Web: [markhesketh.co.uk](https://www.markhesketh.co.uk/)
 * Email: [contact@markhesketh.co.uk](mailto:contact@markhesketh.co.uk)
-* Twitter: [twitter.com/markyhesketh](http://www.twitter.com/markyhesketh/)
-* Github: [github.com/heskethm](http://www.github.com/heskethm/)
+* Twitter: [twitter.com/markahesketh](http://www.twitter.com/markahesketh)
+* Github: [github.com/markahesketh](http://www.github.com/markahesketh)
 
 License
 -------
 
-[MIT](http://opensource.org/licenses/MIT)
+Available under the [MIT license](LICENSE).
